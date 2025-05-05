@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel - SRKR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>
+  * {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #003366;
+    border-radius: 5px;
+  }
+
+  header {
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  }
+
+  header img {
+    height: 55px;
+    border-radius: 10px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #ffcc00;
+  }
+
+  marquee {
+    font-weight: bold;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #003366;
+    padding: 8px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .login-box {
+    max-width: 420px;
+    margin: 120px auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    text-align: center;
+    animation: fadeIn 1s ease;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    display: none;
+    animation: slideFade 1s ease forwards;
+  }
+
+  h2 {
+    color: #002244;
+    margin-top: 30px;
+  }
+
+  input, button {
+    padding: 12px 15px;
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+
+  input:focus {
+    border-color: #005fa3;
+    box-shadow: 0 0 6px rgba(0, 95, 163, 0.4);
+  }
+
+  button {
+    background-color: #003366;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  button:hover {
+    background-color: #005fa3;
+    transform: scale(1.02);
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+    animation: fadeIn 1s ease;
+  }
+  ul li {
+    background: #e9f5ff;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: transform 0.2s;
+  }
+  ul li:hover {
+    transform: translateY(-2px);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    animation: slideUp 1s ease;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
+  th {
+    background: #003366;
+    color: white;
+    font-weight: 600;
+  }
+
+  #errorMsg {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0 }
+    to { opacity: 1 }
+  }
+
+  @keyframes slideFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <img src="C:\Users\kesav\OneDrive\Desktop\srkrlogo.jpeg" alt="SRKR Logo" style="height: 60px;" />
+<h1>Welcome to SRKR Engineering College</h1>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="driver.html">🚗 Driver</a>
+      <a href="student.html">🎓 Student</a>
+    </nav>
+  </header>
+<marquee behaviour="scroll" direction="left">
+<div class="scroll-text">🚍 SRKR College Bus Live Tracking - Welcome! 🚍</div></marquee>
+ <div class="login-box" id="loginBox">
+    <h2>🔐 Admin Login</h2>
+    <input type="text" id="username" placeholder="Username (e.g., admin@srkr)">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="errorMsg"></p>
+  </div>
+
+  <div class="container" id="adminPanel">
+    <h2>➕ Add Bus & Driver Details</h2>
+    <input type="text" id="busNo" placeholder="🚌 Bus Number">
+    <input type="text" id="driverName" placeholder="👨‍✈️ Driver Name">
+    <input type="text" id="driverPhone" placeholder="📞 Driver Phone Number">
+    <button onclick="addBus()">✅ Add Bus</button>
+
+    <h2>🗂️ Bus List</h2>
+    <ul id="busList"></ul>
+
+    <h2>📝 Student Feedback</h2>
+    <table id="feedbackTable">
+      <thead>
+        <tr>
+          <th>🎓 Register ID</th>
+          <th>💬 Feedback</th>
+          <th>📅 Date</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (username === "admin@srkr" && password === "admin123") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+      } else {
+        errorMsg.innerText = "❌ Invalid credentials. Try again!";
+      }
+    }
+
+    function addBus() {
+      const busNo = document.getElementById("busNo").value.trim();
+      const driverName = document.getElementById("driverName").value.trim();
+      const driverPhone = document.getElementById("driverPhone").value.trim();
+
+      if (!busNo || !driverName || !driverPhone) {
+        alert("⚠️ Please fill all fields");
+        return;
+      }
+
+      const buses = JSON.parse(localStorage.getItem("srkrBuses")) || [];
+      buses.push({ busNo, driverName, driverPhone });
+      localStorage.setItem("srkrBuses", JSON.stringify(buses));
+      alert("✅ Bus added successfully!");
+      document.getElementById("busNo").value = '';
+      document.getElementById("driverName").value = '';
+      document.getElementById("driverPhone").value = '';
+      loadBusList();
+    }
+
+    function loadBusList() {
+      const buses = JSON.parse(localStorage.getItem("srkrBuses")) || [];
+      const busList = document.getElementById("busList");
+      busList.innerHTML = '';
+      buses.forEach(bus => {
+        const li = document.createElement("li");
+        li.innerText = `🚌 ${bus.busNo} - 👨‍✈️ ${bus.driverName} (📞 ${bus.driverPhone})`;
+        busList.appendChild(li);
+      });
+    }
+
+    function loadFeedbacks() {
+      const feedbacks = JSON.parse(localStorage.getItem("srkrFeedbacks")) || [];
+      const tableBody = document.querySelector("#feedbackTable tbody");
+      tableBody.innerHTML = '';
+      feedbacks.forEach(fb => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${fb.regID}</td>
+          <td>${fb.feedback}</td>
+          <td>${fb.date}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    window.onload = function () {
+      loadBusList();
+      loadFeedbacks();
+    };
+
+  // Load buses on page load
+  document.addEventListener("DOMContentLoaded", loadBusList);
+
+  function loadBusList() {
+    const buses = JSON.parse(localStorage.getItem("srkrBuses")) || [];
+    const table = document.getElementById("busList");
+    table.innerHTML = "";
+
+    buses.forEach((bus, index) => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${bus.busNo}</td>
+        <td>${bus.driverName}</td>
+        <td>${bus.driverPhone}</td>
+        <td>
+          <button onclick="editBus(${index})" style="color: blue;">✏️ Edit</button>
+          <button onclick="deleteBus(${index})" style="color: red;">🗑️ Delete</button>
+        </td>
+      `;
+
+      table.appendChild(row);
+    });
+  }
+
+  function deleteBus(index) {
+    if (confirm("Are you sure you want to delete this bus?")) {
+      const buses = JSON.parse(localStorage.getItem("srkrBuses")) || [];
+      buses.splice(index, 1); // remove the selected bus
+      localStorage.setItem("srkrBuses", JSON.stringify(buses));
+      loadBusList(); // reload UI
+    }
+  }
+
+  function editBus(index) {
+    const buses = JSON.parse(localStorage.getItem("srkrBuses")) || [];
+    const bus = buses[index];
+
+    const newBusNo = prompt("Enter new Bus Number:", bus.busNo);
+    const newDriverName = prompt("Enter new Driver Name:", bus.driverName);
+    const newDriverPhone = prompt("Enter new Driver Phone:", bus.driverPhone);
+
+    if (newBusNo && newDriverName && newDriverPhone) {
+      buses[index] = {
+        busNo: newBusNo,
+        driverName: newDriverName,
+        driverPhone: newDriverPhone
+      };
+      localStorage.setItem("srkrBuses", JSON.stringify(buses));
+      loadBusList();
+    } else {
+      alert("Update cancelled. All fields are required.");
+    }
+  }
+
+  </script>
+</body>
+</html>

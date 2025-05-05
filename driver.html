@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Driver Panel - SRKR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e8f0ff;
+      margin: 0;
+    }
+     ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #003366;
+    border-radius: 5px;
+  }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img {
+      height: 50px;
+    }
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+    marquee {
+    font-weight: bold;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #003366;
+    padding: 8px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+    .container {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #003366;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="C:\Users\kesav\OneDrive\Desktop\srkrlogo.jpeg" alt="SRKR Logo">
+<h1><center>Welcome to SRKR Engineering College<center></h1>
+    <nav>
+      <a href="index.html">🏠Home</a>
+      <a href="admin.html"> 👨‍💻 Admin</a>
+      <a href="student.html">🎓Student</a>
+    </nav>
+  </header>
+<marquee behaviour="scroll" direction="left">
+<div class="scroll-text">🚍 SRKR College Bus Live Tracking - Welcome! 🚍</div></marquee>
+
+  <div class="container" id="loginForm">
+    <h2>Driver Login</h2>
+    <input type="text" id="loginBusNo" placeholder="Enter Bus Number">
+    <input type="text" id="loginPhone" placeholder="Enter Mobile Number">
+    <button onclick="driverLogin()">Login</button>
+  </div>
+
+  <div class="container" id="trackPanel" style="display:none;">
+    <h2>Live Location Update</h2>
+    <p>Bus: <strong id="driverBus"></strong></p>
+    <button onclick="getLiveLocation()">Update My Live Location 📍</button>
+  </div>
+
+  <script>
+    let currentBusNo = null;
+
+    function driverLogin() {
+      const busNo = document.getElementById("loginBusNo").value;
+      const phone = document.getElementById("loginPhone").value;
+      const busData = JSON.parse(localStorage.getItem('srkrBuses')) || [];
+
+      const match = busData.find(bus => bus.busNo === busNo && bus.driverPhone === phone);
+
+      if (match) {
+        currentBusNo = busNo;
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("trackPanel").style.display = "block";
+        document.getElementById("driverBus").innerText = busNo;
+      } else {
+        alert("Invalid Bus Number or Mobile Number");
+      }
+    }
+
+    function getLiveLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const long = position.coords.longitude;
+
+            let locations = JSON.parse(localStorage.getItem("busLocations")) || {};
+            locations[currentBusNo] = {
+              latitude: lat,
+              longitude: long,
+              updatedAt: new Date().toLocaleString()
+            };
+            localStorage.setItem("busLocations", JSON.stringify(locations));
+
+            alert("📍 Location updated successfully!");
+            const mapUrl = `https://www.google.com/maps?q=${lat},${long}`;
+            window.open(mapUrl, "_blank");
+          },
+          (error) => {
+            alert("❌ Failed to get location: " + error.message);
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser");
+      }
+    }
+  </script>
+</body>
+</html>

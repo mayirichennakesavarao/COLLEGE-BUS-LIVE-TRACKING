@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Panel - SRKR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6fa;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header img {
+      height: 50px;
+      border-radius: 8px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00aaff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(135deg, #f5f5f5, #f4f6fa);
+      animation: slideFade 1s ease-in-out;
+    }
+
+    h2 {
+      color: #003366;
+      text-align: center;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 14px;
+    }
+
+    /* Animation */
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Feedback textarea */
+    textarea {
+      height: 100px;
+    }
+
+    .logo {
+      height: 50px;
+      border-radius: 10px;
+      margin-right: 15px;
+    }
+
+    .feedback-section {
+      margin-top: 30px;
+    }
+
+    /* Scroll bar style */
+    .container::-webkit-scrollbar {
+      width: 8px;
+    }
+    .container::-webkit-scrollbar-thumb {
+      background: #003366;
+      border-radius: 5px;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="C:\Users\kesav\OneDrive\Desktop\srkrlogo.jpeg" alt="SRKR Logo" class="logo">
+<h1>Welcome to SRKR Engineering College</h1>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="driver.html">🚗 Driver</a>
+    </nav>
+  </header>
+<marquee behaviour="scroll" direction="left">
+<div class="scroll-text">🚍 SRKR College Bus Live Tracking - Welcome! 🚍</div></marquee>
+ 
+<style>
+.scroll-text {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.scroll-text::after {
+  content: attr(data-text);
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 10s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+</style>
+
+  <div class="container" id="loginBox">
+    <h2>🔑 Student Login</h2>
+    <input type="text" id="studentID" placeholder="Enter Register ID (e.g., 21B95A6@@@)" required>
+    <input type="text" id="studentBus" placeholder="Enter Bus Number" required>
+    <button onclick="studentLogin()">Track My Bus</button>
+  </div>
+
+  <div class="container" id="resultBox" style="display:none;">
+    <h2>Your Bus Details</h2>
+    <p><strong>Bus Number:</strong> <span id="busNo"></span></p>
+    <p><strong>Driver Name:</strong> <span id="driverName"></span></p>
+    <p><strong>Phone:</strong> <span id="driverPhone"></span></p>
+    
+    <h3>Live Location:</h3>
+    <iframe id="mapFrame"></iframe>
+
+    <div class="feedback-section">
+      <h3>📝 Give Your Feedback</h3>
+      <textarea id="feedbackText" placeholder="Write your feedback here..."></textarea>
+      <button onclick="submitFeedback()">Submit Feedback</button>
+    </div>
+  </div>
+
+  <footer>
+    <h3>SRKR Engineering College, Bhimavaram</h3>
+    <p>Chinna-Amiram, Bhimavaram, Andhra Pradesh 534204</p>
+    <p>📞 08816-223332 | 📧 info@srkrec.ac.in</p>
+    <p>© 2025 SRKR Engineering College. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function studentLogin() {
+      const regID = document.getElementById("studentID").value.trim();
+      const busNo = document.getElementById("studentBus").value.trim();
+      const buses = JSON.parse(localStorage.getItem("srkrBuses")) || [];
+      const locationData = JSON.parse(localStorage.getItem("busLocations")) || {};
+      
+      const match = buses.find(bus => bus.busNo === busNo);
+      const location = locationData[busNo];
+
+      if (regID && match && location) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("resultBox").style.display = "block";
+        document.getElementById("busNo").innerText = busNo;
+        document.getElementById("driverName").innerText = match.driverName;
+        document.getElementById("driverPhone").innerText = match.driverPhone;
+        document.getElementById("mapFrame").src = `https://maps.google.com/maps?q=${location.latitude},${location.longitude}&z=15&output=embed`;
+      } else {
+        alert("❌ Invalid Register ID, Bus Number, or Location not available.");
+      }
+    }
+
+    function submitFeedback() {
+      const regID = document.getElementById("studentID").value.trim();
+      const feedback = document.getElementById("feedbackText").value.trim();
+      if (feedback.length === 0) {
+        alert("⚠️ Please enter your feedback!");
+        return;
+      }
+
+      let feedbacks = JSON.parse(localStorage.getItem("srkrFeedbacks")) || [];
+      feedbacks.push({ regID, feedback, date: new Date().toLocaleString() });
+      localStorage.setItem("srkrFeedbacks", JSON.stringify(feedbacks));
+      alert("✅ Thank you for your feedback!");
+      document.getElementById("feedbackText").value = '';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SRKR Engineering College</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+     h1, h2 {
+      text-align: center;
+   }
+
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,0.7)),
+                  url('https://www.srkrec.edu.in/img/campus.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      animation: fadeInBody 1s ease-in-out;
+    }
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+       header {
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLv0TFwNh_yOb2WapJT3ILe-A6mtORxg9r5A&s");
+      background: #003366;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    header img {
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+      margin-left: 20px;
+      flex: 1;
+      
+    }
+
+    nav a {
+      color: white;
+margin: 0 10px;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: yellow;
+    }
+
+    main {
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(6px);
+      min-height: 90vh;
+      animation: fadeInMain 1.2s ease-in-out;
+    }
+
+    @keyframes fadeInMain {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      animation: fadeInSection 2s ease;
+    }
+
+    @keyframes fadeInSection {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    section h2 {
+      font-size: 28px;
+      color: yellow;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    h3 {
+      color: #ffd700;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-top: 10px;
+      color: #eee;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #bbb;
+      font-size: 15px;
+      animation: fadeInFooter 2s ease-in;
+    }
+
+    @keyframes fadeInFooter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    footer b {
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      header h1 {
+        margin-left: 0;
+        font-size: 18px;
+        margin-top: 10px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <img src="C:\Users\kesav\OneDrive\Desktop\srkrlogo.jpeg" alt="SRKR Logo" style="height: 60px;" />
+    <h1>Welcome to SRKR Engineering College</h1>
+    <nav>
+      <a href="admin.html"> 👨‍💻 Admin</a> |
+      <a href="driver.html">🚗Driver</a>| 
+      <a href="student.html">🎓Student</a>
+    </nav>
+  </header>
+<marquee behaviour="scroll" direction="left">
+<div class="scroll-text">🚍 SRKR College Bus Live Tracking - Welcome! 🚍</div></marquee>
+ 
+<style>
+.scroll-text {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.scroll-text::after {
+  content: attr(data-text);
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 10s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+</style>
+
+  <main style="background-image: url("C:\Users\kesav\OneDrive\Desktop\srkrbackground.jpeg"); background-size: cover; height: 500px;">
+      <section>
+      <h2>Explore Campus Features</h2>
+      <h3><b>Infrastructure</b></h3>
+      <p>Established in 1980, SRKR Engineering College boasts a sprawling campus equipped with modern facilities. The college provides a conducive environment for learning, with well-maintained classrooms, seminar halls, and e-classrooms. The campus also features dedicated buildings for various departments, ensuring specialized infrastructure for each field of study</p>
+<h3><b>Laboratories</b></h3>
+<p>SRKR places a strong emphasis on practical learning, evident from its extensive laboratory facilities. For instance, the Computer Science & Engineering department houses 11 well-equipped laboratories, 3 research labs, and 4 e-classrooms. These labs are designed to provide hands-on experience and support research initiatives</p>
+<h3><b>Faculty</b></h3>
+<p>The college prides itself on its experienced and qualified faculty members. In the Computer Science & Engineering department alone, there are 69 faculty members, including 16 Ph.D. holders, with several others pursuing doctoral studies. This blend of academic expertise and ongoing research involvement ensures that students receive quality education and mentorship</p>
+<h3><b>Placements</b></h3>
+<p>SRKR Engineering College has a dedicated Training & Placement Cell that actively facilitates student placements. In the 2022-2023 academic year, the college achieved 1,866 placement offers. Notably, the highest package offered was ₹29.5 LPA by Morgan Stanley for the role of Technology Analyst. The average package stands around ₹3.5–4 LPA, with prominent recruiters including Cognizant, Accenture, TCS, Infosys, and Wipro.</p>
+    </section>
+ </main>
+
+<footer>
+    📍 <strong>SRKR Engineering College</strong> — Chinna-Amiram, Bhimavaram, Andhra Pradesh 534204<br>
+    ☎️ Phone: +91 8816-223332; 📧 Email: principal@srkrec.ac.in<br><br>
+    © 2025 SRKR Engineering College. All rights reserved.
+  </footer>
+</body>
+</html>
